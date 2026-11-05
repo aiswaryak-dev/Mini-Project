@@ -1,0 +1,367 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light Theme Tokens */
+  --bg-primary: #FAFAF8;
+  --bg-secondary: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-input: #FEFCE8;
+  --bg-hover: #F1F5F9;
+  --bg-sidebar: #FFFFFF;
+  --text-primary: #063D24;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --border-color: #E2E8F0;
+  --border-strong: #CBD5E1;
+  --accent-green: #16883D;
+  --accent-green-hover: #127132;
+  --accent-green-light: #EAF6E8;
+  --shadow-color: rgba(6, 61, 36, 0.05);
+}
+
+.dark {
+  /* Dark Theme Tokens (Elevated Surfaces, WCAG AAA contrast) */
+  --bg-primary: #0F1115;
+  --bg-secondary: #1A1D23;
+  --bg-card: #1A1D23;
+  --bg-input: #222630;
+  --bg-hover: #262A34;
+  --bg-sidebar: #14171E;
+  --text-primary: #F8FAFC;
+  --text-secondary: #E2E8F0;
+  --text-muted: #94A3B8;
+  --border-color: #2A2E36;
+  --border-strong: #3F4452;
+  --accent-green: #22C55E;
+  --accent-green-hover: #16A34A;
+  --accent-green-light: #132B1F;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@keyframes scan {
+  0% { top: 0%; }
+  50% { top: 95%; }
+  100% { top: 0%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* Custom Glassmorphism Utility with Theme Support */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* -------------------------------------------------------------
+   GLOBAL DARK MODE TEXT READABILITY & CONTRAST ENGINE
+   Ensures 100% text readability across every component in dark mode
+   ------------------------------------------------------------- */
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+  color: #F8FAFC !important;
+}
+
+/* Dark mode inputs, selects & textareas */
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: #222630 !important;
+  color: #F8FAFC !important;
+  border-color: #3F4452 !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+.dark label {
+  color: #E2E8F0 !important;
+}
+
+/* High contrast text overrides for light-mode utility classes */
+.dark .text-slate-900,
+.dark .text-slate-800,
+.dark .text-slate-700,
+.dark .text-plant-dark,
+.dark .text-black,
+.dark .text-\[\#063D24\] {
+  color: #F8FAFC !important;
+}
+
+.dark .text-slate-600,
+.dark .text-slate-500 {
+  color: #CBD5E1 !important;
+}
+
+.dark .text-slate-400 {
+  color: #94A3B8 !important;
+}
+
+.dark .text-\[\#16883D\] {
+  color: #22C55E !important;
+}
+
+/* Surface overrides for hardcoded white & light containers */
+.dark .bg-white {
+  background-color: #1A1D23 !important;
+}
+
+.dark .bg-\[\#FAFAF8\],
+.dark .bg-\[\#F4F7F4\] {
+  background-color: #0F1115 !important;
+}
+
+.dark .border-slate-100,
+.dark .border-slate-200 {
+  border-color: #2A2E36 !important;
+}
+
+.dark .border-slate-300 {
+  border-color: #3F4452 !important;
+}
+
+.dark .bg-\[\#EAF6E8\] {
+  background-color: #132B1F !important;
+}
+
+.dark .bg-slate-50 {
+  background-color: #262A34 !important;
+}
+
+.dark .bg-slate-100 {
+  background-color: #222630 !important;
+}
+
+/* -------------------------------------------------------------
+   GLOBAL TEXT READABILITY & TYPOGRAPHY SCALE ENGINE (STAGE 2)
+   Enlarged typography scale for MCA project report screenshots:
+   - Body text: ~16-18px
+   - Small labels, buttons, inputs, tables, cards: at least 15-16px
+   - Page headings: 24-30px, Section headings: 18-22px
+   - Diagnosis results, disease names, treatments: prominent & clear
+   ------------------------------------------------------------- */
+
+/* Base typography scale */
+body {
+  font-size: 1.0625rem; /* ~17px */
+  line-height: 1.6;
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* Micro-text utility upgrades (9px, 10px, 11px -> prominent readable sizes) */
+.text-\[9px\] {
+  font-size: 0.8125rem !important; /* 13px */
+  line-height: 1.15rem !important;
+}
+
+.text-\[10px\] {
+  font-size: 0.875rem !important; /* 14px */
+  line-height: 1.25rem !important;
+}
+
+.text-\[11px\] {
+  font-size: 0.9375rem !important; /* 15px */
+  line-height: 1.35rem !important;
+}
+
+.text-\[13px\] {
+  font-size: 1rem !important; /* 16px */
+  line-height: 1.45rem !important;
+}
+
+/* Base small utility upgrades (12px -> 15px, 14px -> 16px for comfortable reading) */
+.text-xs {
+  font-size: 0.9375rem !important; /* 15px */
+  line-height: 1.45rem !important;
+}
+
+.text-sm {
+  font-size: 1rem !important; /* 16px */
+  line-height: 1.55rem !important;
+}
+
+.text-base {
+  font-size: 1.0625rem !important; /* 17px */
+  line-height: 1.65rem !important;
+}
+
+/* Form controls readability: Inputs, selects, and textareas */
+input,
+select,
+textarea {
+  font-size: 1rem !important; /* 16px */
+  line-height: 1.5 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-size: 0.9375rem !important; /* 15px */
+}
+
+/* Form labels readability */
+label,
+.label {
+  font-size: 0.9375rem !important; /* 15px */
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0.01em;
+}
+
+/* Buttons and Action Links */
+button,
+a.inline-flex,
+a.flex {
+  font-size: max(0.9375rem, inherit);
+}
+
+button.text-xs,
+a.text-xs {
+  font-size: 0.9375rem !important; /* 15px */
+}
+
+button.text-sm,
+a.text-sm {
+  font-size: 1rem !important; /* 16px */
+}
+
+/* Sidebar Navigation Links */
+aside nav a,
+aside nav button {
+  font-size: 0.9375rem !important; /* 15px */
+  line-height: 1.4 !important;
+}
+
+aside h1 {
+  font-size: 1.0625rem !important; /* 17px */
+}
+
+aside p {
+  font-size: 0.875rem !important; /* 14px */
+}
+
+/* Data Tables readability (Admin & reporting views) */
+table {
+  font-size: 0.9375rem !important; /* 15px */
+}
+
+table th {
+  font-size: 0.9375rem !important; /* 15px */
+  font-weight: 700 !important;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+table td {
+  font-size: 0.9375rem !important; /* 15px */
+  line-height: 1.5 !important;
+}
+
+table td button,
+table td a {
+  font-size: 0.875rem !important; /* 14px */
+  font-weight: 700 !important;
+}
+
+/* Analysis result cards, disease names, treatment recommendations */
+.animate-fadeIn ul li {
+  font-size: 1rem !important; /* 16px */
+  line-height: 1.6 !important;
+}
+
+.animate-fadeIn p {
+  font-size: 1rem !important; /* 16px */
+  line-height: 1.6 !important;
+}
+
+.animate-fadeIn h4 {
+  font-size: 1.45rem !important; /* ~23px */
+  font-weight: 800 !important;
+  line-height: 1.35 !important;
+}
+
+.animate-fadeIn h5 {
+  font-size: 1.05rem !important; /* ~17px */
+  font-weight: 700 !important;
+}
+
+/* Status pills, confidence scores, and severity tags in analysis results */
+.animate-fadeIn span.rounded-full,
+.rounded-full.text-\[10px\],
+.rounded-full.text-\[11px\] {
+  font-size: 0.875rem !important; /* 14px */
+  line-height: 1.25rem !important;
+}
+
+/* Dashboard feature cards safety: accommodate larger text without clipping */
+.h-56 {
+  height: auto !important;
+  min-height: 16.5rem !important;
+}
+
+/* Telemetry & SVG Chart timestamp readability */
+svg text {
+  font-size: 12px !important;
+}
+
+/* Headings Scale: Page Headings (24-30px) & Section Headings (18-22px) */
+h1 {
+  font-size: 1.875rem !important; /* 30px */
+  line-height: 1.25 !important;
+}
+
+h2 {
+  font-size: 1.625rem !important; /* 26px */
+  line-height: 1.3 !important;
+}
+
+h3 {
+  font-size: 1.35rem !important; /* 21.6px */
+  line-height: 1.35 !important;
+}
+
+h4 {
+  font-size: 1.15rem !important; /* 18.4px */
+  line-height: 1.4 !important;
+}
+
+h5 {
+  font-size: 1.05rem !important; /* 16.8px */
+  line-height: 1.4 !important;
+}
+
+h6 {
+  font-size: 0.95rem !important; /* 15.2px */
+  line-height: 1.4 !important;
+}
+
+
